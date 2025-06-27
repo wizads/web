@@ -247,15 +247,15 @@
         
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
             margin-top: 50px;
         }
         
         .product-card {
             background: var(--card-gradient);
             border-radius: 20px;
-            padding: 30px;
+            padding: 25px;
             transition: transform 0.3s;
             position: relative;
             overflow: hidden;
@@ -290,31 +290,32 @@
         }
         
         .product-icon {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             background: rgba(110, 68, 255, 0.1);
             border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            font-size: 30px;
+            margin-bottom: 15px;
+            font-size: 24px;
             color: var(--primary);
         }
         
         .product-title {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
         }
         
         .product-features {
             list-style: none;
-            margin: 20px 0;
+            margin: 15px 0;
+            font-size: 0.95rem;
         }
         
         .product-features li {
-            padding: 8px 0;
-            padding-left: 30px;
+            padding: 6px 0;
+            padding-left: 25px;
             position: relative;
         }
         
@@ -327,15 +328,94 @@
         }
         
         .product-price {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin: 25px 0;
+            margin: 20px 0;
             color: var(--secondary);
         }
         
         .product-price span {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--gray);
+        }
+        
+        /* Featured Products */
+        .featured-products {
+            padding: 80px 0;
+            background: rgba(15, 12, 41, 0.5);
+        }
+        
+        .featured-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--darker);
+        }
+        
+        .featured-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .featured-container::-webkit-scrollbar-track {
+            background: var(--darker);
+            border-radius: 10px;
+        }
+        
+        .featured-container::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+        
+        .featured-card {
+            flex: 0 0 auto;
+            width: 250px;
+            background: var(--card-gradient);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .featured-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .featured-badge {
+            background: var(--gradient);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .featured-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(110, 68, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: var(--primary);
+        }
+        
+        .featured-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .featured-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 15px 0;
+            color: var(--secondary);
         }
         
         /* Benefits Section */
@@ -658,6 +738,10 @@
             .section-title {
                 font-size: 2rem;
             }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
         }
         
         @media (max-width: 480px) {
@@ -674,7 +758,7 @@
             }
             
             .product-card {
-                padding: 25px;
+                padding: 20px;
             }
             
             .modal-content {
@@ -750,7 +834,6 @@
                         <li>Payment method attached</li>
                         <li>100% verified by Facebook</li>
                         <li>24-48 hour delivery</li>
-                        <li>Basic support included</li>
                     </ul>
                     <div class="product-price">$299 <span>/one-time</span></div>
                     <button class="cta-button order-button" data-product="Verified Business Manager">Order Now</button>
@@ -769,7 +852,6 @@
                         <li>No account restrictions</li>
                         <li>Dedicated account manager</li>
                         <li>24/7 priority support</li>
-                        <li>1-3 day setup</li>
                     </ul>
                     <div class="product-price">$499 <span>/one-time</span></div>
                     <button class="cta-button order-button" data-product="Unrestricted Ad Account">Order Now</button>
@@ -782,17 +864,66 @@
                         <i class="fas fa-crown"></i>
                     </div>
                     <h3 class="product-title">Agency Bundle</h3>
-                    <p>Complete solution for agencies and large businesses</p>
+                    <p>Complete solution for agencies</p>
                     <ul class="product-features">
                         <li>5 Business Managers</li>
                         <li>10 Ad Accounts</li>
                         <li>Custom spending limits</li>
                         <li>24/7 premium support</li>
-                        <li>Instant setup</li>
-                        <li>White-label solution</li>
                     </ul>
                     <div class="product-price">$899 <span>/one-time</span></div>
                     <button class="cta-button order-button" data-product="Agency Bundle">Order Now</button>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="product-title">Ad Account Restoration</h3>
+                    <p>Recover restricted ad accounts</p>
+                    <ul class="product-features">
+                        <li>Quick account recovery</li>
+                        <li>Prevent future restrictions</li>
+                        <li>Expert consultation</li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <div class="product-price">$199 <span>/account</span></div>
+                    <button class="cta-button order-button" data-product="Ad Account Restoration">Order Now</button>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="product-title">Managed Ad Service</h3>
+                    <p>Full-service ad management</p>
+                    <ul class="product-features">
+                        <li>Campaign setup & optimization</li>
+                        <li>Daily monitoring</li>
+                        <li>Performance reporting</li>
+                        <li>Creative development</li>
+                    </ul>
+                    <div class="product-price">$499 <span>/month</span></div>
+                    <button class="cta-button order-button" data-product="Managed Ad Service">Order Now</button>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3 class="product-title">Secure Payment Method</h3>
+                    <p>Pre-attached payment solutions</p>
+                    <ul class="product-features">
+                        <li>Virtual credit cards</li>
+                        <li>International payment methods</li>
+                        <li>High spending limits</li>
+                        <li>Fraud protection</li>
+                    </ul>
+                    <div class="product-price">$149 <span>/method</span></div>
+                    <button class="cta-button order-button" data-product="Secure Payment Method">Order Now</button>
                 </div>
             </div>
         </div>
@@ -867,6 +998,78 @@
                     <div class="step-number">3</div>
                     <h3 class="step-title">Receive Product</h3>
                     <p>Get your product details delivered within 24 hours</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Products</h2>
+                <p class="section-subtitle">Discover our popular ad solutions</p>
+            </div>
+            
+            <div class="featured-container">
+                <!-- Featured 1 -->
+                <div class="featured-card">
+                    <div class="featured-badge">NEW</div>
+                    <div class="featured-icon">
+                        <i class="fab fa-facebook"></i>
+                    </div>
+                    <h3 class="featured-title">Business Manager Setup</h3>
+                    <p>Custom setup for your needs</p>
+                    <div class="featured-price">$249</div>
+                    <button class="cta-button order-button" data-product="Business Manager Setup">Order Now</button>
+                </div>
+                
+                <!-- Featured 2 -->
+                <div class="featured-card">
+                    <div class="featured-badge">LIMITED</div>
+                    <div class="featured-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="featured-title">Premium Ad Account</h3>
+                    <p>High-spending capability</p>
+                    <div class="featured-price">$349</div>
+                    <button class="cta-button order-button" data-product="Premium Ad Account">Order Now</button>
+                </div>
+                
+                <!-- Featured 3 -->
+                <div class="featured-card">
+                    <div class="featured-badge">POPULAR</div>
+                    <div class="featured-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3 class="featured-title">Account Recovery</h3>
+                    <p>Restore restricted accounts</p>
+                    <div class="featured-price">$199</div>
+                    <button class="cta-button order-button" data-product="Account Recovery">Order Now</button>
+                </div>
+                
+                <!-- Featured 4 -->
+                <div class="featured-card">
+                    <div class="featured-badge">BUNDLE</div>
+                    <div class="featured-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <h3 class="featured-title">Starter Package</h3>
+                    <p>Everything to get started</p>
+                    <div class="featured-price">$399</div>
+                    <button class="cta-button order-button" data-product="Starter Package">Order Now</button>
+                </div>
+                
+                <!-- Featured 5 -->
+                <div class="featured-card">
+                    <div class="featured-badge">PRO</div>
+                    <div class="featured-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="featured-title">Growth Accelerator</h3>
+                    <p>Scale your campaigns faster</p>
+                    <div class="featured-price">$599</div>
+                    <button class="cta-button order-button" data-product="Growth Accelerator">Order Now</button>
                 </div>
             </div>
         </div>
@@ -1024,6 +1227,21 @@
                 }
             });
         });
+        
+        // Random product generator for featured section
+        const featuredProducts = [
+            {name: "Business Manager Pro", price: "$299", icon: "fab fa-facebook"},
+            {name: "Ad Account Plus", price: "$249", icon: "fas fa-ad"},
+            {name: "Restoration Service", price: "$179", icon: "fas fa-redo"},
+            {name: "Payment Method Bundle", price: "$149", icon: "fas fa-credit-card"},
+            {name: "Campaign Manager", price: "$349", icon: "fas fa-chart-pie"},
+            {name: "Agency Starter Kit", price: "$499", icon: "fas fa-briefcase"}
+        ];
+        
+        function getRandomProducts() {
+            const shuffled = [...featuredProducts].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, 3);
+        }
     </script>
 </body>
 </html>
