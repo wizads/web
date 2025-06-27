@@ -155,6 +155,112 @@
             box-shadow: 0 10px 20px rgba(110, 68, 255, 0.3);
         }
         
+        /* Service Status Indicator */
+        .service-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: 20px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(110, 68, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .service-status:hover {
+            background: rgba(110, 68, 255, 0.15);
+            box-shadow: 0 0 15px rgba(110, 68, 255, 0.2);
+        }
+        
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--success);
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(46, 204, 113, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+        }
+        
+        .status-text {
+            font-size: 14px;
+            font-weight: 500;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .status-details {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 15px;
+            width: 250px;
+            padding: 20px;
+            background: var(--darker);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(110, 68, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .service-status:hover .status-details {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .status-details::before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            right: 20px;
+            border-width: 8px;
+            border-style: solid;
+            border-color: transparent transparent var(--darker) transparent;
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .detail-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .detail-value {
+            font-weight: 600;
+            color: var(--light);
+        }
+        
+        .detail-highlight {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+        
         /* Hero Section */
         .hero {
             padding: 180px 0 100px;
@@ -708,13 +814,17 @@
             .steps::before {
                 display: none;
             }
+            
+            .service-status {
+                margin-left: 15px;
+                padding: 6px 14px;
+            }
         }
         
         @media (max-width: 768px) {
             .header-container {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
+                flex-wrap: wrap;
+                gap: 15px;
             }
             
             nav ul {
@@ -742,6 +852,12 @@
             .products-grid {
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             }
+            
+            .service-status {
+                order: 3;
+                margin: 10px auto 0;
+                max-width: 200px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -763,6 +879,10 @@
             
             .modal-content {
                 padding: 30px 20px;
+            }
+            
+            .service-status {
+                display: none;
             }
         }
     </style>
@@ -786,6 +906,31 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
+            
+            <!-- Service Status Indicator -->
+            <div class="service-status">
+                <div class="status-indicator"></div>
+                <div class="status-text">Service Online</div>
+                <div class="status-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Service Status</span>
+                        <span class="detail-value detail-highlight">Active</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Avg. Response</span>
+                        <span class="detail-value">5 minutes</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Delivery Time</span>
+                        <span class="detail-value">Under 24h</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Support</span>
+                        <span class="detail-value">24/7 Available</span>
+                    </div>
+                </div>
+            </div>
+            
             <a href="https://t.me/wizadsofficial" class="cta-button" target="_blank">
                 <i class="fab fa-telegram"></i> Contact Us
             </a>
@@ -1228,20 +1373,19 @@
             });
         });
         
-        // Random product generator for featured section
-        const featuredProducts = [
-            {name: "Business Manager Pro", price: "$299", icon: "fab fa-facebook"},
-            {name: "Ad Account Plus", price: "$249", icon: "fas fa-ad"},
-            {name: "Restoration Service", price: "$179", icon: "fas fa-redo"},
-            {name: "Payment Method Bundle", price: "$149", icon: "fas fa-credit-card"},
-            {name: "Campaign Manager", price: "$349", icon: "fas fa-chart-pie"},
-            {name: "Agency Starter Kit", price: "$499", icon: "fas fa-briefcase"}
-        ];
-        
-        function getRandomProducts() {
-            const shuffled = [...featuredProducts].sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, 3);
+        // Simulate changing response times for service status
+        function updateResponseTime() {
+            const responseTimes = [5, 8, 10, 12, 15];
+            const randomIndex = Math.floor(Math.random() * responseTimes.length);
+            const responseTime = responseTimes[randomIndex];
+            
+            document.querySelector('.detail-item:nth-child(2) .detail-value').textContent = 
+                `${responseTime} minutes`;
         }
+        
+        // Update response time every 30 seconds
+        setInterval(updateResponseTime, 30000);
+        updateResponseTime();
     </script>
 </body>
 </html>
