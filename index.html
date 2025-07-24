@@ -62,7 +62,7 @@
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.4s ease;
-            padding: 12px 0;
+            padding: 10px 0;
         }
         
         .header-container {
@@ -153,7 +153,7 @@
         .header-right {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             order: 3;
         }
         
@@ -248,7 +248,7 @@
         
         /* Hero Section */
         .hero {
-            padding: 150px 0 70px;
+            padding: 140px 0 60px;
             position: relative;
             overflow: hidden;
         }
@@ -329,8 +329,8 @@
         }
         
         .category-container {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
         }
         
         .category-title {
@@ -430,6 +430,7 @@
             font-size: 0.85rem;
             color: var(--gray);
             margin-bottom: 12px;
+            line-height: 1.5;
         }
         
         .product-price {
@@ -882,6 +883,26 @@
             font-size: 0.85rem;
         }
         
+        /* Mobile Navigation */
+        .mobile-nav-icon {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        /* Mobile Contact Button */
+        .mobile-contact-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
         /* Responsive Design */
         @media (min-width: 768px) {
             .header-container {
@@ -918,7 +939,7 @@
         
         @media (max-width: 992px) {
             .hero {
-                padding: 130px 0 60px;
+                padding: 120px 0 50px;
             }
             
             .hero h1 {
@@ -931,13 +952,17 @@
         }
         
         @media (max-width: 767px) {
+            header {
+                padding: 8px 0;
+            }
+            
             .mobile-menu-btn {
                 display: block;
             }
             
             nav {
                 position: fixed;
-                top: 70px;
+                top: 62px;
                 left: 0;
                 width: 100%;
                 background: var(--darker);
@@ -988,11 +1013,48 @@
             .checkout-modal-content {
                 padding: 30px 20px;
             }
+            
+            /* Mobile contact button */
+            .mobile-contact-btn {
+                display: block;
+                order: 3;
+            }
+            
+            /* Hide text in contact button */
+            .header-right .cta-button span {
+                display: none;
+            }
+            
+            .header-right .cta-button {
+                padding: 8px 15px;
+            }
+            
+            /* Product card adjustments */
+            .product-card {
+                padding: 15px;
+            }
+            
+            .product-title {
+                font-size: 1rem;
+            }
+            
+            .product-description {
+                font-size: 0.82rem;
+            }
+            
+            .product-price {
+                font-size: 1.2rem;
+            }
+            
+            .cta-button.add-to-cart {
+                padding: 8px 15px;
+                font-size: 13px;
+            }
         }
         
         @media (max-width: 480px) {
             .hero {
-                padding: 120px 0 50px;
+                padding: 110px 0 40px;
             }
             
             .hero h1 {
@@ -1012,12 +1074,29 @@
             }
             
             .product-card {
-                padding: 15px;
+                padding: 12px;
             }
             
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 25px;
+            }
+            
+            .header-right {
+                gap: 8px;
+            }
+            
+            .service-status {
+                padding: 4px 10px;
+            }
+            
+            .logo-text {
+                font-size: 20px;
+            }
+            
+            .logo-icon {
+                width: 32px;
+                height: 32px;
             }
         }
     </style>
@@ -1059,7 +1138,7 @@
                 </button>
                 
                 <a href="https://t.me/wizadsofficial" class="cta-button" target="_blank">
-                    <i class="fab fa-telegram"></i> Contact Us
+                    <i class="fab fa-telegram"></i> <span>Contact Us</span>
                 </a>
             </div>
         </div>
