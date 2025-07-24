@@ -62,19 +62,21 @@
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.4s ease;
-            padding: 10px 0;
+            padding: 12px 0;
         }
         
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
         
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
+            order: 1;
         }
         
         .logo-icon {
@@ -103,12 +105,20 @@
             font-size: 24px;
             cursor: pointer;
             display: none;
+            order: 2;
+        }
+        
+        nav {
+            order: 4;
+            width: 100%;
+            margin-top: 15px;
         }
         
         nav ul {
             display: flex;
             list-style: none;
             gap: 20px;
+            justify-content: center;
         }
         
         nav a {
@@ -140,6 +150,13 @@
             width: 100%;
         }
         
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            order: 3;
+        }
+        
         .cta-button {
             background: var(--gradient);
             color: var(--light);
@@ -164,7 +181,6 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-left: 15px;
             padding: 6px 14px;
             border-radius: 25px;
             background: rgba(255, 255, 255, 0.05);
@@ -197,9 +213,42 @@
             -webkit-text-fill-color: transparent;
         }
         
+        /* Cart Button */
+        .cart-btn {
+            position: relative;
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .cart-btn:hover {
+            background: rgba(110, 68, 255, 0.1);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--accent);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
         /* Hero Section */
         .hero {
-            padding: 140px 0 70px;
+            padding: 150px 0 70px;
             position: relative;
             overflow: hidden;
         }
@@ -484,8 +533,164 @@
             margin-bottom: 10px;
         }
         
-        /* Modal */
-        .modal-overlay {
+        /* Cart Sidebar */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 100%;
+            max-width: 380px;
+            height: 100%;
+            background: var(--darker);
+            z-index: 2001;
+            transition: right 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.4);
+            border-left: 1px solid rgba(110, 68, 255, 0.2);
+        }
+        
+        .cart-sidebar.active {
+            right: 0;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .cart-title {
+            font-size: 1.4rem;
+            color: var(--secondary);
+        }
+        
+        .close-cart {
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-cart:hover {
+            color: var(--accent);
+        }
+        
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .cart-item-details {
+            flex: 1;
+            padding-right: 15px;
+        }
+        
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-price {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+        
+        .remove-item {
+            background: rgba(255, 77, 148, 0.2);
+            color: var(--accent);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .remove-item:hover {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .total-label {
+            color: var(--gray);
+        }
+        
+        .total-amount {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+        
+        .checkout-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .checkout-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(110, 68, 255, 0.3);
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--gray);
+        }
+        
+        /* Checkout Modal */
+        .checkout-modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -495,7 +700,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 2000;
+            z-index: 3000;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
@@ -503,31 +708,32 @@
             padding: 20px;
         }
         
-        .modal-overlay.active {
+        .checkout-modal-overlay.active {
             opacity: 1;
             visibility: visible;
         }
         
-        .modal-content {
+        .checkout-modal-content {
             background: var(--dark);
             border-radius: 16px;
             width: 100%;
-            max-width: 450px;
-            padding: 30px;
+            max-width: 500px;
+            padding: 40px;
             position: relative;
             transform: translateY(30px);
             opacity: 0;
             transition: all 0.4s ease;
             border: 1px solid rgba(110, 68, 255, 0.3);
             box-shadow: 0 15px 40px rgba(110, 68, 255, 0.2);
+            text-align: center;
         }
         
-        .modal-overlay.active .modal-content {
+        .checkout-modal-overlay.active .checkout-modal-content {
             transform: translateY(0);
             opacity: 1;
         }
         
-        .close-modal {
+        .close-checkout-modal {
             position: absolute;
             top: 15px;
             right: 15px;
@@ -539,36 +745,35 @@
             border: none;
         }
         
-        .close-modal:hover {
+        .close-checkout-modal:hover {
             color: var(--secondary);
         }
         
-        .modal-icon {
-            width: 70px;
-            height: 70px;
+        .checkout-icon {
+            width: 80px;
+            height: 80px;
             background: var(--gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 30px;
+            margin: 0 auto 25px;
+            font-size: 36px;
         }
         
-        .modal-title {
-            font-size: 1.7rem;
-            text-align: center;
-            margin-bottom: 15px;
+        .checkout-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
             background: linear-gradient(to right, var(--secondary), var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
-        .modal-message {
+        .checkout-message {
             text-align: center;
-            margin-bottom: 25px;
-            font-size: 1rem;
-            line-height: 1.5;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.6;
             color: var(--gray);
         }
         
@@ -576,24 +781,42 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             background: #0088cc;
             color: white;
-            padding: 12px 25px;
-            border-radius: 45px;
+            padding: 15px 30px;
+            border-radius: 50px;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 18px;
             text-decoration: none;
             transition: transform 0.3s, background 0.3s;
             width: 100%;
-            max-width: 280px;
-            margin: 0 auto;
+            max-width: 300px;
+            margin: 20px auto 0;
         }
         
         .telegram-button:hover {
             background: #0077b3;
             transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0, 136, 204, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 136, 204, 0.3);
+        }
+        
+        .discount-offer {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(110, 68, 255, 0.2);
+        }
+        
+        .discount-badge {
+            display: inline-block;
+            background: var(--accent-gradient);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
         }
         
         /* Footer */
@@ -660,6 +883,39 @@
         }
         
         /* Responsive Design */
+        @media (min-width: 768px) {
+            .header-container {
+                flex-wrap: nowrap;
+            }
+            
+            nav {
+                width: auto;
+                margin-top: 0;
+                order: 2;
+            }
+            
+            nav ul {
+                justify-content: flex-start;
+            }
+            
+            .header-right {
+                order: 3;
+                margin-left: auto;
+            }
+            
+            .mobile-menu-btn {
+                display: none;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+            
+            .steps {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
         @media (max-width: 992px) {
             .hero {
                 padding: 130px 0 60px;
@@ -674,14 +930,14 @@
             }
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
             .mobile-menu-btn {
                 display: block;
             }
             
             nav {
                 position: fixed;
-                top: 60px;
+                top: 70px;
                 left: 0;
                 width: 100%;
                 background: var(--darker);
@@ -702,23 +958,10 @@
                 align-items: center;
             }
             
-            .header-container {
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-            
             .service-status {
-                margin-left: 0;
-                margin-top: 10px;
-                order: 3;
                 width: 100%;
                 justify-content: center;
-            }
-            
-            .cta-button {
                 margin-top: 10px;
-                width: 100%;
-                text-align: center;
             }
             
             .hero h1 {
@@ -736,6 +979,14 @@
             
             .benefits-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .cart-sidebar {
+                max-width: 320px;
+            }
+            
+            .checkout-modal-content {
+                padding: 30px 20px;
             }
         }
         
@@ -762,10 +1013,6 @@
             
             .product-card {
                 padding: 15px;
-            }
-            
-            .modal-content {
-                padding: 25px 20px;
             }
             
             .footer-content {
@@ -800,16 +1047,79 @@
                 </ul>
             </nav>
             
-            <div class="service-status">
-                <div class="status-indicator"></div>
-                <div class="status-text">Service Online</div>
+            <div class="header-right">
+                <div class="service-status">
+                    <div class="status-indicator"></div>
+                    <div class="status-text">Service Online</div>
+                </div>
+                
+                <button class="cart-btn" id="cartButton">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                
+                <a href="https://t.me/wizadsofficial" class="cta-button" target="_blank">
+                    <i class="fab fa-telegram"></i> Contact Us
+                </a>
             </div>
-            
-            <a href="https://t.me/wizadsofficial" class="cta-button" target="_blank">
-                <i class="fab fa-telegram"></i> Contact Us
-            </a>
         </div>
     </header>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3 class="cart-title">Your Cart</h3>
+            <button class="close-cart" id="closeCart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be added here dynamically -->
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart fa-2x"></i>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span class="total-label">Total:</span>
+                <span class="total-amount" id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="checkout-modal-overlay" id="checkoutModal">
+        <div class="checkout-modal-content">
+            <button class="close-checkout-modal" id="closeCheckoutModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="checkout-icon">
+                <i class="fas fa-gift"></i>
+            </div>
+            <h2 class="checkout-title">Special Offer!</h2>
+            
+            <div class="discount-offer">
+                <div class="discount-badge">EXCLUSIVE DISCOUNT</div>
+                <p class="checkout-message">
+                    For the best discount and promo on your order, please message us directly on Telegram. 
+                    Our team will provide you with a personalized offer!
+                </p>
+            </div>
+            
+            <p class="checkout-message">
+                Contact us now to get additional discounts on your purchase!
+            </p>
+            
+            <a href="https://t.me/wizadsofficial" class="telegram-button" target="_blank">
+                <i class="fab fa-telegram"></i> Message Us on Telegram
+            </a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -849,7 +1159,7 @@
                         <h3 class="product-title">USA Advertising Access Reinstated Profile</h3>
                         <p class="product-description">Farmed profile with post</p>
                         <div class="product-price">$35</div>
-                        <button class="cta-button order-button" data-product="USA Advertising access reinstated Facebook Profile">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="USA Advertising access reinstated Facebook Profile" data-price="35">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -859,7 +1169,7 @@
                         <h3 class="product-title">USA Double Reinstated Profile</h3>
                         <p class="product-description">Farmed profile with post</p>
                         <div class="product-price">$40</div>
-                        <button class="cta-button order-button" data-product="USA Advertising access double reinstated Facebook Profile">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="USA Advertising access double reinstated Facebook Profile" data-price="40">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -870,7 +1180,7 @@
                         <h3 class="product-title">USA Premium Aged Profile</h3>
                         <p class="product-description">Real friends & activities</p>
                         <div class="product-price">$100</div>
-                        <button class="cta-button order-button" data-product="USA Premium Aged & Real facebook profile">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="USA Premium Aged & Real facebook profile" data-price="100">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -891,7 +1201,7 @@
                         <h3 class="product-title">Reinstated Fan Pages</h3>
                         <p class="product-description">Name & Niche Changeable</p>
                         <div class="product-price">$40</div>
-                        <button class="cta-button order-button" data-product="Facebook Advertising Access Reinstated Fan Pages">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="Facebook Advertising Access Reinstated Fan Pages" data-price="40">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -901,7 +1211,7 @@
                         <h3 class="product-title">Aged Fan Pages (2010-2020)</h3>
                         <p class="product-description">Name & Niche Changeable</p>
                         <div class="product-price">$40</div>
-                        <button class="cta-button order-button" data-product="Facebook Aged Fan Pages">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="Facebook Aged Fan Pages" data-price="40">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -912,7 +1222,7 @@
                         <h3 class="product-title">Premium Fan Pages (5K-10K)</h3>
                         <p class="product-description">Rebrandable to Any Niche</p>
                         <div class="product-price">$180</div>
-                        <button class="cta-button order-button" data-product="Premium Facebook Fan Pages (5K–10K Followers)">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="Premium Facebook Fan Pages (5K–10K Followers)" data-price="180">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -923,7 +1233,7 @@
                         <h3 class="product-title">Premium Fan Pages (10K-50K)</h3>
                         <p class="product-description">Rebrandable to Any Niche</p>
                         <div class="product-price">$220</div>
-                        <button class="cta-button order-button" data-product="Premium Facebook Fan Pages (10K–50K Followers)">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="Premium Facebook Fan Pages (10K–50K Followers)" data-price="220">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -934,7 +1244,7 @@
                         <h3 class="product-title">Blue Tick Fan Page</h3>
                         <p class="product-description">Legacy verified for lifetime</p>
                         <div class="product-price">$1500</div>
-                        <button class="cta-button order-button" data-product="Facebook Blue Tick Fan Page">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="Facebook Blue Tick Fan Page" data-price="1500">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -955,7 +1265,7 @@
                         <h3 class="product-title">BM1 $50 Verified</h3>
                         <p class="product-description">Verified with valid ID card</p>
                         <div class="product-price">$70</div>
-                        <button class="cta-button order-button" data-product="BM1 $50 Verified Business Manager">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="BM1 $50 Verified Business Manager" data-price="70">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -965,7 +1275,7 @@
                         <h3 class="product-title">BM1 $50 Verified & Reinstated</h3>
                         <p class="product-description">Verified with valid ID card</p>
                         <div class="product-price">$80</div>
-                        <button class="cta-button order-button" data-product="BM1 $50 Verified & Reinstated Business Manager">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="BM1 $50 Verified & Reinstated Business Manager" data-price="80">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -976,7 +1286,7 @@
                         <h3 class="product-title">BM1 $50 Aged & Verified</h3>
                         <p class="product-description">Real LLC/LTD company document</p>
                         <div class="product-price">$200</div>
-                        <button class="cta-button order-button" data-product="BM1 $50 Aged & Verified Business Manager">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="BM1 $50 Aged & Verified Business Manager" data-price="200">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -997,7 +1307,7 @@
                         <h3 class="product-title">BM1 $250 Unverified</h3>
                         <p class="product-description">1 Ad account with $250 DSL</p>
                         <div class="product-price">$250</div>
-                        <button class="cta-button order-button" data-product="BM1 $250 Unverified Business Manager">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="BM1 $250 Unverified Business Manager" data-price="250">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1007,7 +1317,7 @@
                         <h3 class="product-title">BM1 $250 Verified</h3>
                         <p class="product-description">1 Ad account with $250 DSL</p>
                         <div class="product-price">$300</div>
-                        <button class="cta-button order-button" data-product="BM1 $250 Verified Business Manager">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="BM1 $250 Verified Business Manager" data-price="300">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1017,7 +1327,7 @@
                         <h3 class="product-title">BM5 $250 Unverified</h3>
                         <p class="product-description">5 Ad Accounts with $250 DSL</p>
                         <div class="product-price">$350</div>
-                        <button class="cta-button order-button" data-product="BM5 $250 Unverified Business Manager">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="BM5 $250 Unverified Business Manager" data-price="350">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1027,7 +1337,7 @@
                         <h3 class="product-title">BM5 $250 Verified</h3>
                         <p class="product-description">5 Ad accounts with $250 DSL</p>
                         <div class="product-price">$400</div>
-                        <button class="cta-button order-button" data-product="BM5 $250 Verified Business Manager">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="BM5 $250 Verified Business Manager" data-price="400">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1037,7 +1347,7 @@
                         <h3 class="product-title">BM5 $250 Reinstated</h3>
                         <p class="product-description">5 Ad accounts with $250 DSL</p>
                         <div class="product-price">$450</div>
-                        <button class="cta-button order-button" data-product="BM5 $250 Reinstated Business Manager">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="BM5 $250 Reinstated Business Manager" data-price="450">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1048,7 +1358,7 @@
                         <h3 class="product-title">BM5 $250 Verified & Reinstated</h3>
                         <p class="product-description">5 Ad account with $250 DSL</p>
                         <div class="product-price">$500</div>
-                        <button class="cta-button order-button" data-product="BM5 $250 Verified & Reinstated Business Manager">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="BM5 $250 Verified & Reinstated Business Manager" data-price="500">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1058,7 +1368,7 @@
                         <h3 class="product-title">BM5 Nolimit Unverified</h3>
                         <p class="product-description">5 Ad account with unlimited DSL</p>
                         <div class="product-price">$600</div>
-                        <button class="cta-button order-button" data-product="BM5 Nolimit Unverified Business Manager">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="BM5 Nolimit Unverified Business Manager" data-price="600">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1068,7 +1378,7 @@
                         <h3 class="product-title">BM5 Nolimit Verified</h3>
                         <p class="product-description">5 Ad account with unlimited DSL</p>
                         <div class="product-price">$700</div>
-                        <button class="cta-button order-button" data-product="BM5 Nolimit Verified Business Manager">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="BM5 Nolimit Verified Business Manager" data-price="700">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1078,7 +1388,7 @@
                         <h3 class="product-title">BM5 Nolimit Reinstated</h3>
                         <p class="product-description">5 Ad accounts with unlimited DSL</p>
                         <div class="product-price">$800</div>
-                        <button class="cta-button order-button" data-product="BM5 Nolimit Reinstated Business Manager">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="BM5 Nolimit Reinstated Business Manager" data-price="800">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1089,7 +1399,7 @@
                         <h3 class="product-title">BM5 Nolimit Verified & Reinstated</h3>
                         <p class="product-description">5 Ad accounts with unlimited DSL</p>
                         <div class="product-price">$900</div>
-                        <button class="cta-button order-button" data-product="BM5 Nolimit Verified & Reinstated Business Manager">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="BM5 Nolimit Verified & Reinstated Business Manager" data-price="900">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -1111,7 +1421,7 @@
                         <h3 class="product-title">Super Strong BM5 Nolimit</h3>
                         <p class="product-description">Suitable for all niches!</p>
                         <div class="product-price">$1200</div>
-                        <button class="cta-button order-button" data-product="Super Strong BM5 Nolimit Business Manager">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="Super Strong BM5 Nolimit Business Manager" data-price="1200">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -1133,7 +1443,7 @@
                         <h3 class="product-title">Personal Ad $250 DSL</h3>
                         <p class="product-description">Highly Recommended for Beginners</p>
                         <div class="product-price">$150</div>
-                        <button class="cta-button order-button" data-product="Personal Ad account with $250 DSL">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="Personal Ad account with $250 DSL" data-price="150">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1144,7 +1454,7 @@
                         <h3 class="product-title">Personal Ad $1500 DSL</h3>
                         <p class="product-description">Stable and Ready to go from Day 1</p>
                         <div class="product-price">$350</div>
-                        <button class="cta-button order-button" data-product="Personal Ad account with $1500 DSL">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="Personal Ad account with $1500 DSL" data-price="350">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -1166,7 +1476,7 @@
                         <h3 class="product-title">Entry Point Structure</h3>
                         <p class="product-description">Best for rookies starting E-com</p>
                         <div class="product-price">$299</div>
-                        <button class="cta-button order-button" data-product="The Entry Point Structure">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="The Entry Point Structure" data-price="299">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1177,7 +1487,7 @@
                         <h3 class="product-title">Veteran Structure</h3>
                         <p class="product-description">Pro level assets & complete setup</p>
                         <div class="product-price">$499</div>
-                        <button class="cta-button order-button" data-product="The Veteran Structure">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="The Veteran Structure" data-price="499">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1188,7 +1498,7 @@
                         <h3 class="product-title">Anti Ban Structure</h3>
                         <p class="product-description">Anti detect browser + proxy</p>
                         <div class="product-price">$799</div>
-                        <button class="cta-button order-button" data-product="The Anti Ban Structure Setup">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="The Anti Ban Structure Setup" data-price="799">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -1209,7 +1519,7 @@
                         <h3 class="product-title">Facebook Ad Spy</h3>
                         <p class="product-description">Competitor campaigns & targeting</p>
                         <div class="product-price">$99</div>
-                        <button class="cta-button order-button" data-product="Facebook Ad Spy">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="Facebook Ad Spy" data-price="99">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1219,7 +1529,7 @@
                         <h3 class="product-title">Google Ad Spy</h3>
                         <p class="product-description">Competitor strategies & keywords</p>
                         <div class="product-price">$99</div>
-                        <button class="cta-button order-button" data-product="Google Ad Spy">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="Google Ad Spy" data-price="99">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1229,7 +1539,7 @@
                         <h3 class="product-title">Selfie Verification Bypass</h3>
                         <p class="product-description">Fix suspended profile instantly</p>
                         <div class="product-price">$150</div>
-                        <button class="cta-button order-button" data-product="Selfie & Video selfie verification bypass">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="Selfie & Video selfie verification bypass" data-price="150">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1239,7 +1549,7 @@
                         <h3 class="product-title">Profile Unban</h3>
                         <p class="product-description">Fix permanently banned profile</p>
                         <div class="product-price">$199</div>
-                        <button class="cta-button order-button" data-product="Facebook Profile Unban">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="Facebook Profile Unban" data-price="199">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1249,7 +1559,7 @@
                         <h3 class="product-title">Ad Account Unban</h3>
                         <p class="product-description">Fix permanently banned Ad account</p>
                         <div class="product-price">$249</div>
-                        <button class="cta-button order-button" data-product="Facebook Ad account unban">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="Facebook Ad account unban" data-price="249">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1259,7 +1569,7 @@
                         <h3 class="product-title">BM Unban</h3>
                         <p class="product-description">Fix permanently banned BM</p>
                         <div class="product-price">$299</div>
-                        <button class="cta-button order-button" data-product="Facebook Business Manager Unban">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="Facebook Business Manager Unban" data-price="299">Add to Cart</button>
                     </div>
                     
                     <div class="product-card">
@@ -1269,9 +1579,10 @@
                         <h3 class="product-title">BM Verification</h3>
                         <p class="product-description">Verify to scale fast & unlock DSL</p>
                         <div class="product-price">$349</div>
-                        <button class="cta-button order-button" data-product="Business Manager Verification service">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="Business Manager Verification service" data-price="349">Add to Cart</button>
                     </div>
                     
+                    <!-- Fixed Amazon 100% Refund button -->
                     <div class="product-card">
                         <div class="product-badge">HOT</div>
                         <div class="product-icon">
@@ -1280,7 +1591,7 @@
                         <h3 class="product-title">Amazon 100% Refund</h3>
                         <p class="product-description">Our most hyped selling service</p>
                         <div class="product-price">$499</div>
-                        <button class="cta-button order-button" data-product="Amazon 100% Refund Service">Order Now</button>
+                        <button class="cta-button add-to-cart" data-product="Amazon 100% Refund Service" data-price="499">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -1361,21 +1672,6 @@
         </div>
     </section>
 
-    <!-- Modal Popup -->
-    <div class="modal-overlay" id="discountModal">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <div class="modal-icon">
-                <i class="fas fa-gift"></i>
-            </div>
-            <h2 class="modal-title">Exclusive Offer!</h2>
-            <p class="modal-message">For best discount or promo on <span id="selectedProduct"></span>, please reach out to us directly on Telegram. Our team is ready to provide you with a personalized offer!</p>
-            <a href="https://t.me/wizadsofficial" class="telegram-button" target="_blank">
-                <i class="fab fa-telegram"></i> Message Us on Telegram
-            </a>
-        </div>
-    </div>
-
     <!-- Footer -->
     <footer id="contact">
         <div class="container">
@@ -1447,32 +1743,161 @@
             });
         });
         
-        // Modal functionality
-        const orderButtons = document.querySelectorAll('.order-button');
-        const modal = document.getElementById('discountModal');
-        const closeModal = document.querySelector('.close-modal');
-        const selectedProduct = document.getElementById('selectedProduct');
+        // Cart functionality
+        const cartBtn = document.getElementById('cartButton');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const closeCart = document.getElementById('closeCart');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        const cartCount = document.querySelector('.cart-count');
+        const addToCartBtns = document.querySelectorAll('.add-to-cart');
+        const checkoutBtn = document.getElementById('checkoutBtn');
         
-        orderButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const productName = button.getAttribute('data-product');
-                selectedProduct.textContent = productName;
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
+        // Checkout modal elements
+        const checkoutModal = document.getElementById('checkoutModal');
+        const closeCheckoutModal = document.getElementById('closeCheckoutModal');
+        
+        let cart = [];
+        
+        // Open cart
+        cartBtn.addEventListener('click', () => {
+            cartOverlay.classList.add('active');
+            cartSidebar.classList.add('active');
+        });
+        
+        // Close cart
+        closeCart.addEventListener('click', () => {
+            cartOverlay.classList.remove('active');
+            cartSidebar.classList.remove('active');
+        });
+        
+        cartOverlay.addEventListener('click', () => {
+            cartOverlay.classList.remove('active');
+            cartSidebar.classList.remove('active');
+        });
+        
+        // Add to cart
+        addToCartBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const product = btn.getAttribute('data-product');
+                const price = parseFloat(btn.getAttribute('data-price'));
+                
+                // Add to cart
+                cart.push({ product, price });
+                
+                // Update cart UI
+                updateCart();
+                
+                // Show cart
+                cartOverlay.classList.add('active');
+                cartSidebar.classList.add('active');
+                
+                // Show success message
+                showSuccessMessage(`${product} added to cart!`);
             });
         });
         
-        closeModal.addEventListener('click', () => {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
+        // Update cart function
+        function updateCart() {
+            // Update count
+            cartCount.textContent = cart.length;
+            
+            // Clear cart items
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart fa-2x"></i>
+                        <p>Your cart is empty</p>
+                    </div>
+                `;
+                cartTotal.textContent = '$0.00';
+                return;
+            }
+            
+            // Add items to cart
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.product}</div>
+                        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                    </div>
+                    <button class="remove-item" data-index="${index}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+            
+            // Update total
+            cartTotal.textContent = `$${total.toFixed(2)}`;
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const index = parseInt(btn.getAttribute('data-index'));
+                    cart.splice(index, 1);
+                    updateCart();
+                });
+            });
+        }
+        
+        // Checkout button functionality
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            // Close cart sidebar
+            cartOverlay.classList.remove('active');
+            cartSidebar.classList.remove('active');
+            
+            // Show checkout modal
+            checkoutModal.classList.add('active');
         });
         
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
+        // Close checkout modal
+        closeCheckoutModal.addEventListener('click', () => {
+            checkoutModal.classList.remove('active');
+        });
+        
+        checkoutModal.addEventListener('click', (e) => {
+            if (e.target === checkoutModal) {
+                checkoutModal.classList.remove('active');
             }
         });
+        
+        // Show success message
+        function showSuccessMessage(message) {
+            const successMsg = document.createElement('div');
+            successMsg.className = 'success-message';
+            successMsg.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--success);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                z-index: 3000;
+                animation: fadeInOut 3s ease;
+            `;
+            successMsg.textContent = message;
+            document.body.appendChild(successMsg);
+            
+            setTimeout(() => {
+                successMsg.remove();
+            }, 3000);
+        }
         
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
