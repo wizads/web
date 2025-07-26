@@ -361,31 +361,34 @@
             transform: rotate(90deg);
         }
         
-        .products-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
+        /* Product list view */
+        .products-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
             margin-top: 15px;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease;
         }
         
-        .category-title.active + .products-grid {
+        .category-title.active + .products-list {
             max-height: 2000px;
         }
         
-        .product-card {
+        .product-list-item {
+            display: flex;
             background: var(--card-gradient);
             border-radius: 12px;
-            padding: 18px;
+            padding: 15px;
             transition: transform 0.3s;
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            align-items: center;
         }
         
-        .product-card::before {
+        .product-list-item::before {
             content: '';
             position: absolute;
             top: 0;
@@ -407,7 +410,7 @@
             color: white;
         }
         
-        .product-icon {
+        .product-list-icon {
             width: 44px;
             height: 44px;
             background: rgba(110, 68, 255, 0.1);
@@ -415,35 +418,68 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 12px;
+            margin-right: 15px;
             font-size: 18px;
             color: var(--primary);
+            flex-shrink: 0;
         }
         
-        .product-title {
+        .product-list-content {
+            flex: 1;
+        }
+        
+        .product-list-title {
             font-size: 1.05rem;
-            margin-bottom: 8px;
-            min-height: auto;
+            margin-bottom: 5px;
+            font-weight: 600;
         }
         
-        .product-description {
+        .product-list-description {
             font-size: 0.85rem;
             color: var(--gray);
-            margin-bottom: 12px;
-            line-height: 1.5;
+            margin-bottom: 8px;
         }
         
-        .product-price {
-            font-size: 1.3rem;
+        .product-list-price {
+            font-size: 1.1rem;
             font-weight: 700;
-            margin: 12px 0;
             color: var(--secondary);
+            min-width: 80px;
+            flex-shrink: 0;
+            margin-left: 15px;
             text-align: right;
         }
         
-        .product-price span {
+        .product-list-price span {
             font-size: 0.75rem;
             color: var(--gray);
+        }
+        
+        .product-list-actions {
+            display: flex;
+            gap: 10px;
+            margin-left: 15px;
+        }
+        
+        /* Service learn more button */
+        .learn-more-btn {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .learn-more-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
         }
         
         /* Benefits Section */
@@ -928,10 +964,6 @@
                 display: none;
             }
             
-            .products-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            }
-            
             .steps {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -1029,26 +1061,31 @@
                 padding: 8px 15px;
             }
             
-            /* Product card adjustments */
-            .product-card {
-                padding: 15px;
+            /* Product list adjustments for mobile */
+            .product-list-item {
+                flex-wrap: wrap;
             }
             
-            .product-title {
-                font-size: 1rem;
+            .product-list-content {
+                flex-basis: 100%;
+                margin-bottom: 10px;
             }
             
-            .product-description {
-                font-size: 0.82rem;
+            .product-list-price {
+                text-align: left;
+                margin-left: 0;
+                margin-right: auto;
             }
             
-            .product-price {
-                font-size: 1.2rem;
+            .product-list-actions {
+                flex-basis: 100%;
+                margin-left: 0;
+                justify-content: flex-end;
             }
             
-            .cta-button.add-to-cart {
-                padding: 8px 15px;
-                font-size: 13px;
+            .product-list-item .product-badge {
+                top: 10px;
+                right: 10px;
             }
         }
         
@@ -1071,10 +1108,6 @@
             
             .category-title {
                 font-size: 1.25rem;
-            }
-            
-            .product-card {
-                padding: 12px;
             }
             
             .footer-content {
@@ -1109,7 +1142,7 @@
                 <div class="logo-icon">
                     <i class="fas fa-wand-magic-sparkles"></i>
                 </div>
-                <div class="logo-text"></div>
+                <div class="logo-text">Wizads</div>
             </div>
             
             <button class="mobile-menu-btn">
@@ -1190,12 +1223,8 @@
                 </p>
             </div>
             
-            <p class="checkout-message">
-                Contact us now to get additional discounts on your purchase!
-            </p>
-            
             <a href="https://t.me/wizadsofficial" class="telegram-button" target="_blank">
-                <i class="fab fa-telegram"></i> Message Us on Telegram
+                <i class="fab fa-telegram"></i> Telegram
             </a>
         </div>
     </div>
@@ -1230,36 +1259,48 @@
                     </div>
                     FACEBOOK PROFILES
                 </h3>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-icon">
+                <div class="products-list">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-user-circle"></i>
                         </div>
-                        <h3 class="product-title">USA Advertising Access Reinstated Profile</h3>
-                        <p class="product-description">Farmed profile with post</p>
-                        <div class="product-price">$35</div>
-                        <button class="cta-button add-to-cart" data-product="USA Advertising access reinstated Facebook Profile" data-price="35">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">USA Advertising Access Reinstated Profile</h3>
+                            <p class="product-list-description">Farmed profile with post</p>
+                        </div>
+                        <div class="product-list-price">$35</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="USA Advertising access reinstated Facebook Profile" data-price="35">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
-                        <div class="product-icon">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-user-shield"></i>
                         </div>
-                        <h3 class="product-title">USA Double Reinstated Profile</h3>
-                        <p class="product-description">Farmed profile with post</p>
-                        <div class="product-price">$40</div>
-                        <button class="cta-button add-to-cart" data-product="USA Advertising access double reinstated Facebook Profile" data-price="40">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">USA Double Reinstated Profile</h3>
+                            <p class="product-list-description">Farmed profile with post</p>
+                        </div>
+                        <div class="product-list-price">$40</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="USA Advertising access double reinstated Facebook Profile" data-price="40">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
+                    <div class="product-list-item">
                         <div class="product-badge">PREMIUM</div>
-                        <div class="product-icon">
+                        <div class="product-list-icon">
                             <i class="fas fa-user-tie"></i>
                         </div>
-                        <h3 class="product-title">USA Premium Aged Profile</h3>
-                        <p class="product-description">Real friends & activities</p>
-                        <div class="product-price">$100</div>
-                        <button class="cta-button add-to-cart" data-product="USA Premium Aged & Real facebook profile" data-price="100">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">USA Premium Aged Profile</h3>
+                            <p class="product-list-description">Real friends & activities</p>
+                        </div>
+                        <div class="product-list-price">$100</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="USA Premium Aged & Real facebook profile" data-price="100">Add to Cart</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1272,58 +1313,78 @@
                     </div>
                     FACEBOOK FANPAGES
                 </h3>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-icon">
+                <div class="products-list">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-flag-usa"></i>
                         </div>
-                        <h3 class="product-title">Reinstated Fan Pages</h3>
-                        <p class="product-description">Name & Niche Changeable</p>
-                        <div class="product-price">$40</div>
-                        <button class="cta-button add-to-cart" data-product="Facebook Advertising Access Reinstated Fan Pages" data-price="40">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">Reinstated Fan Pages</h3>
+                            <p class="product-list-description">Name & Niche Changeable</p>
+                        </div>
+                        <div class="product-list-price">$40</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="Facebook Advertising Access Reinstated Fan Pages" data-price="40">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
-                        <div class="product-icon">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-flag"></i>
                         </div>
-                        <h3 class="product-title">Aged Fan Pages (2010-2020)</h3>
-                        <p class="product-description">Name & Niche Changeable</p>
-                        <div class="product-price">$40</div>
-                        <button class="cta-button add-to-cart" data-product="Facebook Aged Fan Pages" data-price="40">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">Aged Fan Pages (2010-2020)</h3>
+                            <p class="product-list-description">Name & Niche Changeable</p>
+                        </div>
+                        <div class="product-list-price">$40</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="Facebook Aged Fan Pages" data-price="40">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
+                    <div class="product-list-item">
                         <div class="product-badge">POPULAR</div>
-                        <div class="product-icon">
+                        <div class="product-list-icon">
                             <i class="fas fa-users"></i>
                         </div>
-                        <h3 class="product-title">Premium Fan Pages (5K-10K)</h3>
-                        <p class="product-description">Rebrandable to Any Niche</p>
-                        <div class="product-price">$180</div>
-                        <button class="cta-button add-to-cart" data-product="Premium Facebook Fan Pages (5K–10K Followers)" data-price="180">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">Premium Fan Pages (5K-10K)</h3>
+                            <p class="product-list-description">Rebrandable to Any Niche</p>
+                        </div>
+                        <div class="product-list-price">$180</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="Premium Facebook Fan Pages (5K–10K Followers)" data-price="180">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
+                    <div class="product-list-item">
                         <div class="product-badge">POPULAR</div>
-                        <div class="product-icon">
+                        <div class="product-list-icon">
                             <i class="fas fa-crown"></i>
                         </div>
-                        <h3 class="product-title">Premium Fan Pages (10K-50K)</h3>
-                        <p class="product-description">Rebrandable to Any Niche</p>
-                        <div class="product-price">$220</div>
-                        <button class="cta-button add-to-cart" data-product="Premium Facebook Fan Pages (10K–50K Followers)" data-price="220">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">Premium Fan Pages (10K-50K)</h3>
+                            <p class="product-list-description">Rebrandable to Any Niche</p>
+                        </div>
+                        <div class="product-list-price">$220</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="Premium Facebook Fan Pages (10K–50K Followers)" data-price="220">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
+                    <div class="product-list-item">
                         <div class="product-badge">ELITE</div>
-                        <div class="product-icon">
+                        <div class="product-list-icon">
                             <i class="fas fa-check-circle"></i>
                         </div>
-                        <h3 class="product-title">Blue Tick Fan Page</h3>
-                        <p class="product-description">Legacy verified for lifetime</p>
-                        <div class="product-price">$1500</div>
-                        <button class="cta-button add-to-cart" data-product="Facebook Blue Tick Fan Page" data-price="1500">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">Blue Tick Fan Page</h3>
+                            <p class="product-list-description">Legacy verified for lifetime</p>
+                        </div>
+                        <div class="product-list-price">$1500</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="Facebook Blue Tick Fan Page" data-price="1500">Add to Cart</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1336,36 +1397,48 @@
                     </div>
                     VERIFIED BUSINESS MANAGER
                 </h3>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-icon">
+                <div class="products-list">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-building"></i>
                         </div>
-                        <h3 class="product-title">BM1 $50 Verified</h3>
-                        <p class="product-description">Verified with valid ID card</p>
-                        <div class="product-price">$70</div>
-                        <button class="cta-button add-to-cart" data-product="BM1 $50 Verified Business Manager" data-price="70">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">BM1 $50 Verified</h3>
+                            <p class="product-list-description">Verified with valid ID card</p>
+                        </div>
+                        <div class="product-list-price">$70</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="BM1 $50 Verified Business Manager" data-price="70">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
-                        <div class="product-icon">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-sync-alt"></i>
                         </div>
-                        <h3 class="product-title">BM1 $50 Verified & Reinstated</h3>
-                        <p class="product-description">Verified with valid ID card</p>
-                        <div class="product-price">$80</div>
-                        <button class="cta-button add-to-cart" data-product="BM1 $50 Verified & Reinstated Business Manager" data-price="80">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">BM1 $50 Verified & Reinstated</h3>
+                            <p class="product-list-description">Verified with valid ID card</p>
+                        </div>
+                        <div class="product-list-price">$80</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="BM1 $50 Verified & Reinstated Business Manager" data-price="80">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
+                    <div class="product-list-item">
                         <div class="product-badge">PREMIUM</div>
-                        <div class="product-icon">
+                        <div class="product-list-icon">
                             <i class="fas fa-file-contract"></i>
                         </div>
-                        <h3 class="product-title">BM1 $50 Aged & Verified</h3>
-                        <p class="product-description">Real LLC/LTD company document</p>
-                        <div class="product-price">$200</div>
-                        <button class="cta-button add-to-cart" data-product="BM1 $50 Aged & Verified Business Manager" data-price="200">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">BM1 $50 Aged & Verified</h3>
+                            <p class="product-list-description">Real LLC/LTD company document</p>
+                        </div>
+                        <div class="product-list-price">$200</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="BM1 $50 Aged & Verified Business Manager" data-price="200">Add to Cart</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1378,107 +1451,147 @@
                     </div>
                     UNLIMITED BUSINESS MANAGER
                 </h3>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-icon">
+                <div class="products-list">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-chart-line"></i>
                         </div>
-                        <h3 class="product-title">BM1 $250 Unverified</h3>
-                        <p class="product-description">1 Ad account with $250 DSL</p>
-                        <div class="product-price">$250</div>
-                        <button class="cta-button add-to-cart" data-product="BM1 $250 Unverified Business Manager" data-price="250">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">BM1 $250 Unverified</h3>
+                            <p class="product-list-description">1 Ad account with $250 DSL</p>
+                        </div>
+                        <div class="product-list-price">$250</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="BM1 $250 Unverified Business Manager" data-price="250">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
-                        <div class="product-icon">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-check-circle"></i>
                         </div>
-                        <h3 class="product-title">BM1 $250 Verified</h3>
-                        <p class="product-description">1 Ad account with $250 DSL</p>
-                        <div class="product-price">$300</div>
-                        <button class="cta-button add-to-cart" data-product="BM1 $250 Verified Business Manager" data-price="300">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">BM1 $250 Verified</h3>
+                            <p class="product-list-description">1 Ad account with $250 DSL</p>
+                        </div>
+                        <div class="product-list-price">$300</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="BM1 $250 Verified Business Manager" data-price="300">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
-                        <div class="product-icon">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-layer-group"></i>
                         </div>
-                        <h3 class="product-title">BM5 $250 Unverified</h3>
-                        <p class="product-description">5 Ad Accounts with $250 DSL</p>
-                        <div class="product-price">$350</div>
-                        <button class="cta-button add-to-cart" data-product="BM5 $250 Unverified Business Manager" data-price="350">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">BM5 $250 Unverified</h3>
+                            <p class="product-list-description">5 Ad Accounts with $250 DSL</p>
+                        </div>
+                        <div class="product-list-price">$350</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="BM5 $250 Unverified Business Manager" data-price="350">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
-                        <div class="product-icon">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-check-double"></i>
                         </div>
-                        <h3 class="product-title">BM5 $250 Verified</h3>
-                        <p class="product-description">5 Ad accounts with $250 DSL</p>
-                        <div class="product-price">$400</div>
-                        <button class="cta-button add-to-cart" data-product="BM5 $250 Verified Business Manager" data-price="400">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">BM5 $250 Verified</h3>
+                            <p class="product-list-description">5 Ad accounts with $250 DSL</p>
+                        </div>
+                        <div class="product-list-price">$400</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="BM5 $250 Verified Business Manager" data-price="400">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
-                        <div class="product-icon">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-redo"></i>
                         </div>
-                        <h3 class="product-title">BM5 $250 Reinstated</h3>
-                        <p class="product-description">5 Ad accounts with $250 DSL</p>
-                        <div class="product-price">$450</div>
-                        <button class="cta-button add-to-cart" data-product="BM5 $250 Reinstated Business Manager" data-price="450">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">BM5 $250 Reinstated</h3>
+                            <p class="product-list-description">5 Ad accounts with $250 DSL</p>
+                        </div>
+                        <div class="product-list-price">$450</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="BM5 $250 Reinstated Business Manager" data-price="450">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
+                    <div class="product-list-item">
                         <div class="product-badge">POPULAR</div>
-                        <div class="product-icon">
+                        <div class="product-list-icon">
                             <i class="fas fa-shield-alt"></i>
                         </div>
-                        <h3 class="product-title">BM5 $250 Verified & Reinstated</h3>
-                        <p class="product-description">5 Ad account with $250 DSL</p>
-                        <div class="product-price">$500</div>
-                        <button class="cta-button add-to-cart" data-product="BM5 $250 Verified & Reinstated Business Manager" data-price="500">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">BM5 $250 Verified & Reinstated</h3>
+                            <p class="product-list-description">5 Ad account with $250 DSL</p>
+                        </div>
+                        <div class="product-list-price">$500</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="BM5 $250 Verified & Reinstated Business Manager" data-price="500">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
-                        <div class="product-icon">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-infinity"></i>
                         </div>
-                        <h3 class="product-title">BM5 Nolimit Unverified</h3>
-                        <p class="product-description">5 Ad account with unlimited DSL</p>
-                        <div class="product-price">$600</div>
-                        <button class="cta-button add-to-cart" data-product="BM5 Nolimit Unverified Business Manager" data-price="600">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">BM5 Nolimit Unverified</h3>
+                            <p class="product-list-description">5 Ad account with unlimited DSL</p>
+                        </div>
+                        <div class="product-list-price">$600</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="BM5 Nolimit Unverified Business Manager" data-price="600">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
-                        <div class="product-icon">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-infinity"></i>
                         </div>
-                        <h3 class="product-title">BM5 Nolimit Verified</h3>
-                        <p class="product-description">5 Ad account with unlimited DSL</p>
-                        <div class="product-price">$700</div>
-                        <button class="cta-button add-to-cart" data-product="BM5 Nolimit Verified Business Manager" data-price="700">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">BM5 Nolimit Verified</h3>
+                            <p class="product-list-description">5 Ad account with unlimited DSL</p>
+                        </div>
+                        <div class="product-list-price">$700</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="BM5 Nolimit Verified Business Manager" data-price="700">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
-                        <div class="product-icon">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-infinity"></i>
                         </div>
-                        <h3 class="product-title">BM5 Nolimit Reinstated</h3>
-                        <p class="product-description">5 Ad accounts with unlimited DSL</p>
-                        <div class="product-price">$800</div>
-                        <button class="cta-button add-to-cart" data-product="BM5 Nolimit Reinstated Business Manager" data-price="800">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">BM5 Nolimit Reinstated</h3>
+                            <p class="product-list-description">5 Ad accounts with unlimited DSL</p>
+                        </div>
+                        <div class="product-list-price">$800</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="BM5 Nolimit Reinstated Business Manager" data-price="800">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
+                    <div class="product-list-item">
                         <div class="product-badge">PREMIUM</div>
-                        <div class="product-icon">
+                        <div class="product-list-icon">
                             <i class="fas fa-infinity"></i>
                         </div>
-                        <h3 class="product-title">BM5 Nolimit Verified & Reinstated</h3>
-                        <p class="product-description">5 Ad accounts with unlimited DSL</p>
-                        <div class="product-price">$900</div>
-                        <button class="cta-button add-to-cart" data-product="BM5 Nolimit Verified & Reinstated Business Manager" data-price="900">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">BM5 Nolimit Verified & Reinstated</h3>
+                            <p class="product-list-description">5 Ad accounts with unlimited DSL</p>
+                        </div>
+                        <div class="product-list-price">$900</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="BM5 Nolimit Verified & Reinstated Business Manager" data-price="900">Add to Cart</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1491,16 +1604,20 @@
                     </div>
                     SPECIAL BUSINESS MANAGER
                 </h3>
-                <div class="products-grid">
-                    <div class="product-card">
+                <div class="products-list">
+                    <div class="product-list-item">
                         <div class="product-badge">ELITE</div>
-                        <div class="product-icon">
+                        <div class="product-list-icon">
                             <i class="fas fa-gem"></i>
                         </div>
-                        <h3 class="product-title">Super Strong BM5 Nolimit</h3>
-                        <p class="product-description">Suitable for all niches!</p>
-                        <div class="product-price">$1200</div>
-                        <button class="cta-button add-to-cart" data-product="Super Strong BM5 Nolimit Business Manager" data-price="1200">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">Super Strong BM5 Nolimit</h3>
+                            <p class="product-list-description">Suitable for all niches!</p>
+                        </div>
+                        <div class="product-list-price">$1200</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="Super Strong BM5 Nolimit Business Manager" data-price="1200">Add to Cart</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1513,27 +1630,35 @@
                     </div>
                     PERSONAL AD ACCOUNT WITH HIGH DSL
                 </h3>
-                <div class="products-grid">
-                    <div class="product-card">
+                <div class="products-list">
+                    <div class="product-list-item">
                         <div class="product-badge">BEST VALUE</div>
-                        <div class="product-icon">
+                        <div class="product-list-icon">
                             <i class="fas fa-ad"></i>
                         </div>
-                        <h3 class="product-title">Personal Ad $250 DSL</h3>
-                        <p class="product-description">Highly Recommended for Beginners</p>
-                        <div class="product-price">$150</div>
-                        <button class="cta-button add-to-cart" data-product="Personal Ad account with $250 DSL" data-price="150">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">Personal Ad $250 DSL</h3>
+                            <p class="product-list-description">Highly Recommended for Beginners</p>
+                        </div>
+                        <div class="product-list-price">$150</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="Personal Ad account with $250 DSL" data-price="150">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
+                    <div class="product-list-item">
                         <div class="product-badge">PREMIUM</div>
-                        <div class="product-icon">
+                        <div class="product-list-icon">
                             <i class="fas fa-rocket"></i>
                         </div>
-                        <h3 class="product-title">Personal Ad $1500 DSL</h3>
-                        <p class="product-description">Stable and Ready to go from Day 1</p>
-                        <div class="product-price">$350</div>
-                        <button class="cta-button add-to-cart" data-product="Personal Ad account with $1500 DSL" data-price="350">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">Personal Ad $1500 DSL</h3>
+                            <p class="product-list-description">Stable and Ready to go from Day 1</p>
+                        </div>
+                        <div class="product-list-price">$350</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="Personal Ad account with $1500 DSL" data-price="350">Add to Cart</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1546,38 +1671,50 @@
                     </div>
                     FACEBOOK STRUCTURE
                 </h3>
-                <div class="products-grid">
-                    <div class="product-card">
+                <div class="products-list">
+                    <div class="product-list-item">
                         <div class="product-badge">BEST SELLER</div>
-                        <div class="product-icon">
+                        <div class="product-list-icon">
                             <i class="fas fa-door-open"></i>
                         </div>
-                        <h3 class="product-title">Entry Point Structure</h3>
-                        <p class="product-description">Best for rookies starting E-com</p>
-                        <div class="product-price">$299</div>
-                        <button class="cta-button add-to-cart" data-product="The Entry Point Structure" data-price="299">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">Entry Point Structure</h3>
+                            <p class="product-list-description">Best for rookies starting E-com</p>
+                        </div>
+                        <div class="product-list-price">$299</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="The Entry Point Structure" data-price="299">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
+                    <div class="product-list-item">
                         <div class="product-badge">PREMIUM</div>
-                        <div class="product-icon">
+                        <div class="product-list-icon">
                             <i class="fas fa-medal"></i>
                         </div>
-                        <h3 class="product-title">Veteran Structure</h3>
-                        <p class="product-description">Pro level assets & complete setup</p>
-                        <div class="product-price">$499</div>
-                        <button class="cta-button add-to-cart" data-product="The Veteran Structure" data-price="499">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">Veteran Structure</h3>
+                            <p class="product-list-description">Pro level assets & complete setup</p>
+                        </div>
+                        <div class="product-list-price">$499</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="The Veteran Structure" data-price="499">Add to Cart</button>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
+                    <div class="product-list-item">
                         <div class="product-badge">ELITE</div>
-                        <div class="product-icon">
+                        <div class="product-list-icon">
                             <i class="fas fa-ban"></i>
                         </div>
-                        <h3 class="product-title">Anti Ban Structure</h3>
-                        <p class="product-description">Anti detect browser + proxy</p>
-                        <div class="product-price">$799</div>
-                        <button class="cta-button add-to-cart" data-product="The Anti Ban Structure Setup" data-price="799">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">Anti Ban Structure</h3>
+                            <p class="product-list-description">Anti detect browser + proxy</p>
+                        </div>
+                        <div class="product-list-price">$799</div>
+                        <div class="product-list-actions">
+                            <button class="cta-button add-to-cart" data-product="The Anti Ban Structure Setup" data-price="799">Add to Cart</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1590,87 +1727,118 @@
                     </div>
                     SERVICES
                 </h3>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-icon">
+                <div class="products-list">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-eye"></i>
                         </div>
-                        <h3 class="product-title">Facebook Ad Spy</h3>
-                        <p class="product-description">Competitor campaigns & targeting</p>
-                        <div class="product-price">$99</div>
-                        <button class="cta-button add-to-cart" data-product="Facebook Ad Spy" data-price="99">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">Facebook Ad Spy</h3>
+                            <p class="product-list-description">Competitor campaigns & targeting</p>
+                        </div>
+                        <div class="product-list-price">$99</div>
+                        <div class="product-list-actions">
+                            <a href="https://t.me/wizadsofficial" class="learn-more-btn" target="_blank">Learn More</a>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
-                        <div class="product-icon">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fab fa-google"></i>
                         </div>
-                        <h3 class="product-title">Google Ad Spy</h3>
-                        <p class="product-description">Competitor strategies & keywords</p>
-                        <div class="product-price">$99</div>
-                        <button class="cta-button add-to-cart" data-product="Google Ad Spy" data-price="99">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">Google Ad Spy</h3>
+                            <p class="product-list-description">Competitor strategies & keywords</p>
+                        </div>
+                        <div class="product-list-price">$99</div>
+                        <div class="product-list-actions">
+                            <a href="https://t.me/wizadsofficial" class="learn-more-btn" target="_blank">Learn More</a>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
-                        <div class="product-icon">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-camera"></i>
                         </div>
-                        <h3 class="product-title">Selfie Verification Bypass</h3>
-                        <p class="product-description">Fix suspended profile instantly</p>
-                        <div class="product-price">$150</div>
-                        <button class="cta-button add-to-cart" data-product="Selfie & Video selfie verification bypass" data-price="150">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">Selfie Verification Bypass</h3>
+                            <p class="product-list-description">Fix suspended profile instantly</p>
+                        </div>
+                        <div class="product-list-price">$150</div>
+                        <div class="product-list-actions">
+                            <a href="https://t.me/wizadsofficial" class="learn-more-btn" target="_blank">Learn More</a>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
-                        <div class="product-icon">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-user-slash"></i>
                         </div>
-                        <h3 class="product-title">Profile Unban</h3>
-                        <p class="product-description">Fix permanently banned profile</p>
-                        <div class="product-price">$199</div>
-                        <button class="cta-button add-to-cart" data-product="Facebook Profile Unban" data-price="199">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">Profile Unban</h3>
+                            <p class="product-list-description">Fix permanently banned profile</p>
+                        </div>
+                        <div class="product-list-price">$199</div>
+                        <div class="product-list-actions">
+                            <a href="https://t.me/wizadsofficial" class="learn-more-btn" target="_blank">Learn More</a>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
-                        <div class="product-icon">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-ad"></i>
                         </div>
-                        <h3 class="product-title">Ad Account Unban</h3>
-                        <p class="product-description">Fix permanently banned Ad account</p>
-                        <div class="product-price">$249</div>
-                        <button class="cta-button add-to-cart" data-product="Facebook Ad account unban" data-price="249">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">Ad Account Unban</h3>
+                            <p class="product-list-description">Fix permanently banned Ad account</p>
+                        </div>
+                        <div class="product-list-price">$249</div>
+                        <div class="product-list-actions">
+                            <a href="https://t.me/wizadsofficial" class="learn-more-btn" target="_blank">Learn More</a>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
-                        <div class="product-icon">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-briefcase"></i>
                         </div>
-                        <h3 class="product-title">BM Unban</h3>
-                        <p class="product-description">Fix permanently banned BM</p>
-                        <div class="product-price">$299</div>
-                        <button class="cta-button add-to-cart" data-product="Facebook Business Manager Unban" data-price="299">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">BM Unban</h3>
+                            <p class="product-list-description">Fix permanently banned BM</p>
+                        </div>
+                        <div class="product-list-price">$299</div>
+                        <div class="product-list-actions">
+                            <a href="https://t.me/wizadsofficial" class="learn-more-btn" target="_blank">Learn More</a>
+                        </div>
                     </div>
                     
-                    <div class="product-card">
-                        <div class="product-icon">
+                    <div class="product-list-item">
+                        <div class="product-list-icon">
                             <i class="fas fa-file-alt"></i>
                         </div>
-                        <h3 class="product-title">BM Verification</h3>
-                        <p class="product-description">Verify to scale fast & unlock DSL</p>
-                        <div class="product-price">$349</div>
-                        <button class="cta-button add-to-cart" data-product="Business Manager Verification service" data-price="349">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">BM Verification</h3>
+                            <p class="product-list-description">Verify to scale fast & unlock DSL</p>
+                        </div>
+                        <div class="product-list-price">$349</div>
+                        <div class="product-list-actions">
+                            <a href="https://t.me/wizadsofficial" class="learn-more-btn" target="_blank">Learn More</a>
+                        </div>
                     </div>
                     
-                    <!-- Fixed Amazon 100% Refund button -->
-                    <div class="product-card">
+                    <div class="product-list-item">
                         <div class="product-badge">HOT</div>
-                        <div class="product-icon">
+                        <div class="product-list-icon">
                             <i class="fab fa-amazon"></i>
                         </div>
-                        <h3 class="product-title">Amazon 100% Refund</h3>
-                        <p class="product-description">Our most hyped selling service</p>
-                        <div class="product-price">$499</div>
-                        <button class="cta-button add-to-cart" data-product="Amazon 100% Refund Service" data-price="499">Add to Cart</button>
+                        <div class="product-list-content">
+                            <h3 class="product-list-title">Amazon 100% Refund</h3>
+                            <p class="product-list-description">Our most hyped selling service</p>
+                        </div>
+                        <div class="product-list-price">$499</div>
+                        <div class="product-list-actions">
+                            <a href="https://t.me/wizadsofficial" class="learn-more-btn" target="_blank">Learn More</a>
+                        </div>
                     </div>
                 </div>
             </div>
