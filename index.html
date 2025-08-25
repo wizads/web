@@ -176,6 +176,83 @@
             box-shadow: 0 8px 15px rgba(110, 68, 255, 0.3);
         }
         
+        /* NEW: Contact Dropdown Styles */
+        .contact-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .contact-dropdown-btn {
+            background: var(--gradient);
+            color: var(--light);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .contact-dropdown-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(110, 68, 255, 0.3);
+        }
+        
+        .contact-dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            margin-top: 10px;
+            background: var(--dark);
+            min-width: 200px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            overflow: hidden;
+            border: 1px solid rgba(110, 68, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .contact-dropdown-content a {
+            color: var(--light);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .contact-dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        
+        .contact-dropdown-content a:hover {
+            background: rgba(110, 68, 255, 0.1);
+            color: var(--secondary);
+        }
+        
+        .contact-dropdown-content a i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        .contact-dropdown:hover .contact-dropdown-content {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         /* Service Status Indicator */
         .service-status {
             display: flex;
@@ -1110,6 +1187,20 @@
                 height: 40px;
                 font-size: 16px;
             }
+            
+            /* Mobile dropdown adjustments */
+            .contact-dropdown-btn span {
+                display: none;
+            }
+            
+            .contact-dropdown-btn {
+                padding: 8px 15px;
+            }
+            
+            .contact-dropdown-content {
+                right: -50px;
+                min-width: 180px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1178,7 +1269,7 @@
                 <div class="logo-icon">
                     <i class="fas fa-wand-magic-sparkles"></i>
                 </div>
-                <div class="logo-text"></div>
+                <div class="logo-text">Wizads</div>
             </div>
             
             <button class="mobile-menu-btn">
@@ -1206,9 +1297,26 @@
                     <span class="cart-count">0</span>
                 </button>
                 
-                <a href="https://t.me/wizadsofficial" class="cta-button" target="_blank">
-                    <i class="fab fa-telegram"></i> <span>Contact Us</span>
-                </a>
+                <!-- NEW: Contact Dropdown -->
+                <div class="contact-dropdown">
+                    <button class="contact-dropdown-btn">
+                        <i class="fas fa-comments"></i> <span>Contact Us</span>
+                    </button>
+                    <div class="contact-dropdown-content">
+                        <a href="https://t.me/wizadsofficial" target="_blank">
+                            <i class="fab fa-telegram"></i> Telegram
+                        </a>
+                        <a href="https://wa.me/1234567890" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://discord.gg/example" target="_blank">
+                            <i class="fab fa-discord"></i> Discord
+                        </a>
+                        <a href="mailto:support@wizads.com">
+                            <i class="fas fa-envelope"></i> Email
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -1400,7 +1508,7 @@
                         </div>
                         <div class="product-list-content">
                             <h3 class="product-list-title">Premium Facebook Fan Pages (10K–50K Followers) – Instantly Rebrandable to Any Niche</h3>
-                            <p class="product-list-description">Rebrandable to Any Niche</p>
+                            <p class="product-list-description">Rebbrandable to Any Niche</p>
                         </div>
                         <div class="product-list-price">$220</div>
                         <div class="product-list-actions">
@@ -1916,7 +2024,7 @@
                 
                 <div class="benefit-card">
                     <div class="benefit-icon">
-                        <i class="fas fa-lock"></i>
+                            <i class="fas fa-lock"></i>
                     </div>
                     <h3 class="benefit-title">Secure Transactions</h3>
                     <p>All transactions protected with escrow service</p>
@@ -2050,7 +2158,7 @@
         });
         
         // Close cart
-        closeCart.addEventListener('click', () => {
+        closeCart.addEventListener('click', () {
             cartOverlay.classList.remove('active');
             cartSidebar.classList.remove('active');
         });
@@ -2228,6 +2336,16 @@
         
         // Open first category by default
         document.querySelector('.category-title').classList.add('active');
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdowns = document.querySelectorAll('.contact-dropdown');
+            dropdowns.forEach(dropdown => {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.querySelector('.contact-dropdown-content').style.display = 'none';
+                }
+            });
+        });
     </script>
 </body>
 </html>
